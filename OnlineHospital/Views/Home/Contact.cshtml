@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title.</h2>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div id="map" style="height: 400px; width: 100%;">
+            See it on the map...
+        </div>
+    </div>
+</div>
+<div class="well">
+    <div class="row">
+        <div class="col-sm-4">
+            <address>
+                <strong>Stoyan G. Bonchev</strong><br />
+                Buskager<br />
+                2720 Vanløse.<br />
+                Email: <a href="mailto:stoy0023@stud.kea.dk">stoy0023@stud.kea.dk</a>
+            </address>
+        </div>
+        <div class="col-sm-4">
+            <address>
+                <strong>School address</strong><br />
+                Lygten 37<br />
+                2200 København NV<br />
+                <abbr title="Web page">W:</abbr><a href="http://kea.dk" target="_blank">www.kea.dk</a><br />
+                <abbr title="E-mail">E:</abbr><a href="mailto:office@kea.dk">office@kea.dk</a><br />
+                <abbr title="Phone">P:</abbr>(+45) 46 46 04 00<br />
+                NOTE: On the map is the address of KEA!
+            </address>
+        </div>
+        <div class="col-sm-4">
+            <img src="@Url.Content("/Content/Images/contact.jpg")" alt="contact" width="200" height="200" />
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    @Scripts.Render("~/bundles/gmap")
+}

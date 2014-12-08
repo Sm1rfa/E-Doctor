@@ -1,0 +1,26 @@
+﻿@model OnlineHospital.Models.Desease
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Desease</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeseaseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeseaseName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {id = Model.DeseaseId}) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,57 @@
+﻿body {
+    padding-bottom: 20px;
+    padding-top: 50px;
+}
+
+/* Set padding to keep content from hitting the edges */
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+
+.dl-horizontal dt { white-space: normal; }
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+input,
+select,
+textarea { max-width: 280px; }
+
+.grayBox {
+    -moz-border-radius: 4px;
+    -moz-box-shadow: inset -1px 1px 0 1px rgba(255, 255, 255, 1);
+    -ms-border-radius: 4px;
+    -ms-box-shadow: inset -1px 1px 0 0 rgba(255, 255, 255, 1), 0 -1px 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-border-radius: 4px;
+    -webkit-box-shadow: inset -1px 1px 0 1px rgba(255, 255, 255, 1);
+    background-color: #f4f4f4;
+    border-radius: 4px;
+    box-shadow: inset -1px 1px 0 0 rgba(255, 255, 255, 1), 0 -1px 1px 1px rgba(0, 0, 0, 0.1);
+    padding: 2em 2em .5em;
+    position: relative;
+}
+ 
+
+.Invisible { display: none; }
+
+.glyphicon-pencil, .glyphicon-plus, .glyphicon-arrow-down, .glyphicon-minus, .glyphicon-remove {
+     cursor: pointer;
+}
+
+.FloppyDiskDiv {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.aboutToggle { margin: 20px; }
+
+.scheduler_container{
+    width:100%;
+    height:600px;
+    border:1px solid #aeaeae;
+}

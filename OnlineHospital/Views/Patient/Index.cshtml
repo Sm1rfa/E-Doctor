@@ -1,0 +1,226 @@
+﻿@using OnlineHospital.Models
+@model OnlineHospital.ViewModels.PatientIndexViewModel
+
+@{
+    ViewBag.Title = "Patient";
+}
+
+@Html.Partial("_NavigationBar")
+<br />
+<br />
+<br />
+
+<link href="~/Content/table-tools.css" rel="stylesheet" />
+<script src="~/Scripts/lib/table-tools.js"></script>
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+
+<input id="filterBtn" type="button" value="Deseases"
+       class="btn btn-default" />
+
+<input id="editDesease" type="button" value="Edit Deseases"
+       class="btn btn-primary" />
+
+<input id="newDesease" value="Create Desease" type="button"
+       class="btn btn-success" />
+
+<div id="DeseasesDiv" class="MarginLeft40 Invisible">
+
+    <div id="appendDiv" class="row">
+
+    </div>
+
+    @foreach (var des in Model.Deseases)
+    {
+        <div class="FilterDeseases">
+            <label class="lblHeader">
+                <input id="deseaseInput" type="checkbox" name="desease" class="Desease MarginRight5" />
+                @des.DeseaseName
+            </label>
+            <span class="glyphicon glyphicon-plus Invisible"></span>
+            <span class="glyphicon glyphicon-arrow-down Invisible"></span>
+
+            <div class="outerContainer Invisible">
+                @foreach (var med in @des.Medicines)
+                {
+                    <div class="MarginLeft40 DeseaseDiv">
+
+                        <label>
+
+                            @med.MedicineName
+                        </label>
+                        <span class="glyphicon glyphicon-pencil Invisible"></span>
+                        <span class="glyphicon glyphicon-remove Invisible"></span>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+</div>
+<br />
+<br />
+<br />
+<!-- modal placeholder-->
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+<!-- modal place holder ends -->
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Patients</div>
+
+    <div class="panel-body">
+        <!-- search bar starts -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-3">
+                    <form action="" class="search-form">
+                        <div class="form-group has-feedback">
+                            <label for="search" class="sr-only">Search</label>
+                            <input type="text" onkeyup=" doSearch() " class="form-control" name="search" id="searchForm" placeholder="search">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- search bar ends -->
+
+        @Html.ActionLink("Add", "Create", null, new { data_modal = "", id = "btnCreate", @class = "btn btn-small btn-primary pull-right" })
+    </div>
+
+    <table id="patientTable" class="table table-bordered table-hover">
+        @foreach (var item in Model.Patients)
+        {
+            <tr>
+                <td style="width: 20px">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Details", "Details", new { id = item.PatientId }, new { data_modal = "" })</li>
+                            <li>@Html.ActionLink("Edit", "Edit", new { id = item.PatientId }, new { data_modal = "" })</li>
+                            <li>@Html.ActionLink("Make Receipt", "MakeReceipt", new { id = item.PatientId }, new { data_modal = "" })</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Delete", "Delete", new { id = item.PatientId }, new { data_modal = "" })</li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)  @Html.DisplayFor(modelItem => item.LastName)
+                    <div class="text-muted">
+                        <small>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </small>
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </table>
+
+    <div class="panel-footer">Count = @Model.Patients.Count()</div>
+
+    <div id="pageNavPosition" class="page" align="center">
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modalform")
+
+}
+
+<script type="text/javascript">
+    var pager = new Pager('patientTable', 5);
+    pager.init();
+    pager.showPageNav('pager', 'pageNavPosition');
+    pager.showPage(1);
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#filterBtn").click(function () {
+            $("#DeseasesDiv").toggle('slow');
+        });
+        $("#editDesease").click(function () {
+            $(".glyphicon-plus, .glyphicon-pencil, .glyphicon-remove, .glyphicon-arrow-down").toggle();
+        });
+        $(".glyphicon-arrow-down").click(function () {
+            $(this).parent().children(".outerContainer").slideToggle();
+        });
+        $(".glyphicon-plus").click(function () {
+            $(this).parent().children(".outerContainer").append('<input id="inputId" type="text" class="form-control col-xs-8" ' +
+                'placeholder="New Medicine " /><div class="FloppyDiskDiv">' +
+                '<span class="glyphicon glyphicon-floppy-disk"> </span>' +
+                '<span class="glyphicon glyphicon-minus"></span></div><br />');
+        });
+
+        $(".glyphicon-minus").click(function () {
+                $("#inputId").remove();
+        });
+
+        $("#newDesease").click(function() {
+            $("#DeseasesDiv").append('<input id="createDeseaseId" type="text" class="form-control col-xs-8" ' +
+                'placeholder="New Desease" /><div class="FloppyDiskDiv">' +
+                '<span class="glyphicon glyphicon-floppy-saved"></span>' +
+                '<span class="glyphicon glyphicon-minus"></span></div><br />');
+        });
+
+        $(document).on("click", ".glyphicon-floppy-disk", function () {
+
+            var medicineName = $("#inputId").val();
+            var deseaseName = $(this).parent().parent().children.children("#deseaseInput").val();
+
+
+
+            var data = { MedicineName: medicineName, DeseaseId: deseaseName };
+
+            console.log($(this).parent().parent().children('.lblHeader').children('.Desease'));
+
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("Create", "Medicine")",
+                data: JSON.stringify(data),
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (returnValue) {
+                    alert(returnValue);
+                },
+                error: function () {
+                    alert("failure");
+                }
+            });
+        });
+
+        $(document).on("click", ".glyphicon-floppy-saved", function() {
+            var des = $("#createDeseaseId").val();
+            var Desease = { DeseaseName: des };
+
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("Create", "Desease")",
+                data: JSON.stringify(Desease),
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function() {
+                    alert("You have saved new desease!");
+                },
+                error: function() {
+                    alert("Something went wrong, not saved!");
+                }
+            });
+        });
+
+    });
+
+</script>

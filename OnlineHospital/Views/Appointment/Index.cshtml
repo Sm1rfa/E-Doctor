@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Appointments";
+}
+
+@Html.Partial("_NavigationBar")
+
+
+<div class="scheduler_container">
+    @Html.Raw(Model.Render())
+</div>

@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+
+<div class="aboutToggle">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">What is E-Doctor?</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <p>
+                        This application is good to use from doctors or any other medical workers.
+                        <br /> It allows you to manage huge lists of patients, deseases, medicines and etc.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Expected features?</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>
+                        In future it is plan to be added dynamic calender which will help the <br />
+                        user to add appointments with patients and automaticly send the email 2 hours <br />
+                        before the hour.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Why to use it?</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p> Because it is cool :) </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <img src="@Url.Content("/Content/Images/doctor8.png")" alt="doctor" width="200" height="300" />
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+}
